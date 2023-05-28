@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Скрейпинг библиографических данных | Редактор публикации</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+<header>
+    <h2>{{article.fullName}}</h2>
+</header>
+
+<table>
+    {{#article}}
+        <tr hidden>
+            <td>id</td>
+            <td id="id">{{id}}</td>
+        </tr>
+        <tr>
+            <td>eLibraryId</td>
+            <td id="eLibraryId">{{eLibraryId}}</td>
+        </tr>
+        <tr>
+            <td>Авторы</td>
+            <td>
+                {{#authors}}
+                    <a href="/author?id={{eLibraryId}}" >{{fullName}} "," </a>
+                {{/authors}}
+            </td>
+        </tr>
+        <tr>
+            <td>Полное наименование</td>
+            <td><input id="fullName" type="text" style='width:100%' value="{{fullName}}"/></td>
+        </tr>
+        <tr>
+            <td>Издательство</td>
+            <td><input id="publishingHouse" type="text" style='width:100%' value="{{publishingHouse}}"/></td>
+        </tr>
+        <tr>
+            <td>Тип публикации</td>
+            <td><input id="publishingType" type="text" style='width:100%' value="{{publishingType}}"/></td>
+        </tr>
+        <tr>
+            <td>Дата публикации</td>
+            <td><input id="publishingDate" type="text" style='width:100%' value="{{publishingDate}}"/></td>
+        </tr>
+        <tr>
+            <td>Страницы</td>
+            <td><input id="pages" type="text" style='width:100%' value="{{pages}}"/></td>
+        </tr>
+        <tr>
+            <td>Конференция</td>
+            <td><input id="conference" type="text" style='width:100%' value="{{conference}}"/></td>
+        </tr>
+        <tr>
+            <td>Индексация</td>
+            <td><input id="indexation" type="text" style='width:100%' value="{{indexation}}"/></td>
+        </tr>
+        <tr>
+            <td>Ссылки на источники
+                <button type="button" onclick="addSource()">Добавить</button>
+            </td>
+            <td id="sources">
+                {{#sources}}
+                    <input type="text" value="{{.}}"/>
+                {{/sources}}
+            </td>
+
+        </tr>
+    {{/article}}
+
+</table>
+<div>
+    <button type="button" class="float" onclick="processUpdateArticle()">Сохранить данные</button>
+</div>
+</body>
+</html>

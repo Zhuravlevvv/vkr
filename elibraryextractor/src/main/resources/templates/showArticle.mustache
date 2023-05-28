@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Статья</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+<header>
+    <h2>{{article.fullName}}</h2>
+</header>
+<hr>
+<table>
+    {{#article}}
+        <tr>
+            <td>eLibraryId</td>
+            <td id="eLibraryId">{{eLibraryId}}</td>
+        </tr>
+        <tr>
+            <td>Авторы</td>
+            <td>
+                {{#authors}}
+                    <a href="/author?id={{eLibraryId}}" >{{fullName}},</a>
+                {{/authors}}
+            </td>
+        </tr>
+        <tr>
+            <td>Полное наименование</td>
+            <td>{{fullName}}</td>
+        </tr>
+        <tr>
+            <td>Издательство</td>
+            <td>{{publishingHouse}}</td>
+        </tr>
+        <tr>
+            <td>Тип публикации</td>
+            <td>{{publishingType}}</td>
+        </tr>
+        <tr>
+            <td>Дата публикации</td>
+            <td>{{publishingDate}}</td>
+        </tr>
+        <tr>
+            <td>Страницы</td>
+            <td>{{pages}}</td>
+        </tr>
+        <tr>
+            <td>Конференция</td>
+            <td>{{conference}}</td>
+        </tr>
+        <tr>
+            <td>Индексация</td>
+            <td>{{indexation}}</td>
+        </tr>
+        <tr>
+            <td>Ссылки на источники</td>
+            <td>
+                {{#sources}}
+                   <div>{{.}}</div>
+                {{/sources}}
+            </td>
+        </tr>
+    {{/article}}
+
+</table>
+<br>
+<div>
+    <button type="button" class="float" onclick="article2json()">Скачать статью</button>
+    <button type="button" class="float" onclick="showUpdateArticle({{article.eLibraryId}})">Редактировать статью</button>
+    <button type="button" class="float" onclick="showDeleteArticle({{article.eLibraryId}})">Удалить статью</button>
+</div>
+</body>
+</html>

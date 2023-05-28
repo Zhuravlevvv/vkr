@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Скрейпинг библиографических данных | Публикации автора</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+<body>
+<header>
+    <h2>{{author.fullName}}</h2>
+</header>
+<a href="/author?id={{author.eLibraryId}}&refresh=true">Обновить информацию об авторе</a>
+<br>
+<table>
+    {{#author}}
+        <tr>
+            <td>eLibraryId</td>
+            <td id="eLibraryId">{{eLibraryId}}</td>
+        </tr>
+        <tr>
+            <td>Организация</td>
+            <td>{{organization}}{{department}}</td>
+        </tr>
+    {{/author}}
+</table>
+<hr>
+<div>
+    <button type="float" class="float" onclick="author2json()">Загрузить все пубикации автора в JSON</button>
+</div>
+<hr>
+<h4 class="label">Публикации автора</h4>
+<table id="loaded">
+    {{#author}}
+        {{#articles}}
+            <tr id="{{eLibraryId}}">
+                <td>
+                    <a href="/article?id={{eLibraryId}}" >{{fullName}}</a>
+                    <button class="float" onclick="showDeleteArticle({{eLibraryId}})">Удалить</button>
+                    <button class="float" onclick="showUpdateArticle({{eLibraryId}})">Редактировать</button>
+                </td>
+            </tr>
+        {{/articles}}
+    {{/author}}
+</table>
+<br/>
+<div>
+    <h4>Незагруженные публикации</h4>
+    <div>
+        <button class="float" type="button" title="Загрузить все незагруженные публикации" onclick="loadArticles()">Загрузить Все</button>
+        <div id="loading" class="float boxLoading" style="display: none"></div>
+    </div>
+</div>
+
+
+<table id="unloaded">
+    {{#links}}
+        <tr>
+            <td>
+                <div style="margin: 3px; padding: 2px">
+                    <a id="{{.}}" href="/article?id={{.}}" >{{.}}</a>
+                </div>
+            </td>
+        </tr>
+    {{/links}}
+</table>
+
+</body>
+</html>
